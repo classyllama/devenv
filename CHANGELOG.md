@@ -1,3 +1,9 @@
+2.0.11
+===============
+
+* Fixed issue where php70u was not found when spinning up web70 as it was moved to the ius archive repo
+
+
 2.0.10
 ===============
 
