@@ -54,7 +54,8 @@ def configure_web (node, php_version: 70)
   Mount.nfs('host-www-sites', MOUNT_PATH + SITES_DIR, SITES_MOUNT)
 
   # bind localhost pub directory
-  Mount.bind(SITES_MOUNT + '/__localhost/pub', '/var/www/html')
+  #Mount.bind(SITES_MOUNT + '/__localhost/pub', '/var/www/html')
+  Mount.vmfs('host-html', MOUNT_PATH + SITES_DIR + '/__localhost/pub', '/var/www/html')
 
   # setup guest provisioners
   Mount.provision(node)
