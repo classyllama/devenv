@@ -1,8 +1,17 @@
+2.0.13
+===============
+
+* improved mysql config so that magento 2.3.0 would finish install and not say "MySQL server has gone away"
+
+2.0.12
+===============
+
+* update percona repo
+
 2.0.11
 ===============
 
 * Fixed issue where php70u was not found when spinning up web70 as it was moved to the ius archive repo
-
 
 2.0.10
 ===============
