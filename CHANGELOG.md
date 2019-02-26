@@ -1,3 +1,8 @@
+2.0.14
+===============
+
+* Fixed issue where php56u was not found when spinning up web56 as it was moved to the ius archive repo
+
 2.0.13
 ===============
 
