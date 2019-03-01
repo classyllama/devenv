@@ -1,4 +1,9 @@
 ---
+# repo rpm URL found from https://www.percona.com/doc/percona-server/5.6/installation/yum_repo.html
+
+# repo files can be derrived from rpm file details
+# rpm -qlp https://www.percona.com/downloads/percona-release/redhat/0.1-6/percona-release-0.1-6.noarch.rpm
+
 - name: Check if Percona Server repo is already configured
   stat:
     path: /etc/yum.repos.d/percona-release.repo
@@ -6,12 +11,18 @@
 
 - name: Install Percona Server repo
   yum:
-    name: "http://www.percona.com/downloads/percona-release/redhat/0.1-4/percona-release-0.1-4.noarch.rpm"
+    name: "https://www.percona.com/downloads/percona-release/redhat/0.1-6/percona-release-0.1-6.noarch.rpm"
     state: present
   when: not percona_repofile_result.stat.exists
 
 - name: Import Percona Server GPG key
   rpm_key:
     key: /etc/pki/rpm-gpg/RPM-GPG-KEY-Percona
+    state: present
+  when: not percona_repofile_result.stat.exists
+
+- name: Import Percona Packaging key
+  rpm_key:
+    key: /etc/pki/rpm-gpg/PERCONA-PACKAGING-KEY
     state: present
   when: not percona_repofile_result.stat.exists
