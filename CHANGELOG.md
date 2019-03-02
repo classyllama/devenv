@@ -1,3 +1,8 @@
+2.0.16
+===============
+
+* Fixed issue where redis32u was not found when spinning up servers as it was moved to the ius archive repo
+
 2.0.14
 ===============
 
