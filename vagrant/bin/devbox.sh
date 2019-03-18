@@ -53,7 +53,6 @@ function setup_devbox {
     assert_cask phpstorm
     assert_cask sequel-pro
     assert_cask sizeup
-    assert_cask skype
     assert_cask sourcetree
     assert_cask textmate
 
