@@ -34,7 +34,7 @@
         </ul>
     </article>
     <footer>
-        <a href="http://github.com/davidalger/devenv">GitHub</a> | <a href="http://twitter.com/blackbooker">Twitter</a>
+        <a href="http://github.com/classyllama/devenv">GitHub</a>
         <p>Copyright &copy; <?= date('Y') ?> by David Alger. Licensed under Open Software License v3.0</p>
     </footer>
 </body>

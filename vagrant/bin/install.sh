@@ -129,7 +129,7 @@ function assert_devenv {
         sudo chown $(whoami):admin /server
         cd /server
         git init -q
-        git remote add origin https://github.com/davidalger/devenv.git
+        git remote add origin https://github.com/classyllama/devenv.git
         git fetch -q origin
         git checkout -q master
         vagrant status | grep -v '/etc/profile' || true  # note: expected to spit out error about re-running vagrant
