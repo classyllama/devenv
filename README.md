@@ -23,7 +23,7 @@ It is setup with different machines running different versions of PHP (PHP 7.0 i
 2. Install technical dependencies and setup the environment, entering your account password when prompted (this may happen a few times):
 
     ```bash
-    curl -s https://raw.githubusercontent.com/davidalger/devenv/master/vagrant/bin/install.sh | bash
+    curl -s https://raw.githubusercontent.com/classyllama/devenv/master/vagrant/bin/install.sh | bash
     source /etc/profile
     ```
 
