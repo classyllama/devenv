@@ -116,6 +116,15 @@ To add the generated root CA to your trusted certs list on the host machine, run
 sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /server/.shared/ssl/rootca/certs/ca.cert.pem
 ```
 
+For Firefox you will need to add the certificate authority manually through Firefox's interface.
+* Export the Vagrant DevEnv certificate authority from your System Keychain (right-click, 'Export "Vagrant DevEnv"')
+* Navigate to your Firefox preferences
+  * Privacy & Security
+  * Scroll down to "Certificates" and click "View Certificates"
+  * Select the "Authorities" section and click "Import..."
+  * Select the Vagrant DevEnv cert authority exported in the first step
+
+
 ##### Windows
 To add the generated root CA to your certificate manager on Windows you will need to copy the `ca.cert.pem` file to a location on your Windows system like `C:\certs\ca.cert.pem` and then open a Command Prompt window in Administrator mode to execute the following command
 
