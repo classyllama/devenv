@@ -1,3 +1,10 @@
+2.0.17
+===============
+
+* Worked around issue with IUS Repo GPG Key Check validations
+  Disabled GPG Check on all IUS repos
+  Issues were seen after ius-release was updated to version 2-1.el7.ius from 1.0-15.ius.centos7
+
 2.0.16
 ===============
 
