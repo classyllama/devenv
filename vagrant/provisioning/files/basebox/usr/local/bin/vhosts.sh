@@ -222,7 +222,7 @@ function main {
     [[ $reset_config ]] && touch /etc/php-fpm.d/sites.d/empty.conf
     [[ $reset_certs ]] && remove_files $certs_dir/*.c??.pem
 
-    sites_list=$(find $sites_dir -mindepth 1 -maxdepth 1 -type d)
+    sites_list=$(find $sites_dir -mindepth 1 -maxdepth 1 \( -type l -o -type d \))
 
     msg "==> Generating site configuration"
     for site_path in $sites_list; do
