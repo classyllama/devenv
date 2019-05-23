@@ -1,3 +1,11 @@
+2.0.18
+===============
+
+* Updated base image to bento/centos-7 (previously bento/centos-7.5)
+  bento/centos-7: CentOS Linux release 7.6.1810
+* Changed ansible roles to use classyllama roles
+* Updates to classyllama/repo_ius adds old IUS GPG key to fix validating older packages from ius-archive
+
 2.0.17
 ===============
 
