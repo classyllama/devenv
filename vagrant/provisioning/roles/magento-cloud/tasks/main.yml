@@ -1,0 +1,13 @@
+---
+  # https://devdocs.magento.com/guides/v2.3/cloud/before/before-workspace-magento-prereqs.html#cloud-ssh-cli-cli-install
+- name: Run magento-cloud installer
+  shell: "curl -sS {{ magento_cloud_installer_url }} | php"
+  become: yes
+  become_user: vagrant
+  register: magento_cloud_installer
+  changed_when: False
+  when: php_version >=72
+  args: 
+    creates: /home/vagrant/.magento-cloud/bin/magento-cloud
+
+- debug: var=magento_cloud_installer
