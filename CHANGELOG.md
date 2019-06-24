@@ -1,3 +1,8 @@
+2.0.20
+===============
+
+* Addition of PHP libsodium support on web72 instance for Magento 2.3.2 requirements
+
 2.0.19
 ===============
 
