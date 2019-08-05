@@ -42,9 +42,9 @@ It is setup with different machines running different versions of PHP (PHP 7.0 i
 
     ```bash
     sudo gem update --system
-    sudo gem install compass
+    sudo sudo gem install -n /usr/local/bin
     ```
-
+      
 2. Generate an RSA key pair. The generated public key will be used to authenticate remote SSH connections
 
     ```bash
