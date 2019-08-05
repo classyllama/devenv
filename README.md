@@ -63,7 +63,7 @@ It is setup with different machines running different versions of PHP (PHP 7.0 i
 
     ```bash
     vagrant ssh -- m2setup.sh --sampledata --hostname=m2.demo
-    echo "10.19.89.14 m2.demo" | sudo tee -a /etc/hosts > /dev/null
+    echo "10.19.89.15 m2.demo" | sudo tee -a /etc/hosts > /dev/null
     ```
 
 ### Quick Reference
