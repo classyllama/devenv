@@ -184,6 +184,25 @@ This happens (per above warning) when the mysql service fails to shutdown cleanl
 
 If the above does not succeed in bringing it back online, try rebooting the host machine. If that still does not solve the issue, it is likely you will have to help mysqld out a bit with recovery. Check `/var/log/mysqld.log` for more info.
 
+##### Virtual Box Cask
+ if you get a error this error while running `curl -s https://raw.githubusercontent.com/classyllama/devenv/master/vagrant/bin/install.sh  https://raw.githubusercontent.com/classyllama/devenv/master/vagrant/bin/devbox.sh | bash /dev/stdin --lib-mode` 
+ 
+ ```Error: Failure while executing; /usr/bin/sudo -E -- env LOGNAME=joshvahl USER=joshvahl USERNAME=joshvahl /usr/sbin/installer -pkg /usr/local/Caskroom/virtualbox/6.0.10,132072/VirtualBox.pkg -target /` exited with 1. Here’s the output:
+installer: Package name is Oracle VM VirtualBox
+installer: Installing at base path /```
+
+You will need to install the virtual box cast and make a change in Security & Privacy
+
+In a terminal run:
+
+`brew cask install virtualbox`
+
+Then Open up System Preferences > Security & Privacy
+
+you’ll see a message saying System software from developer “Oracle America, Inc.” was blocked from loading. If you do see the message, click the lock icon in the bottom left of the window Enter your Mac password Then click the Allow button.
+
+Rerun `curl -s https://raw.githubusercontent.com/classyllama/devenv/master/vagrant/bin/install.sh  https://raw.githubusercontent.com/classyllama/devenv/master/vagrant/bin/devbox.sh | bash /dev/stdin --lib-mode` 
+
 ## Development Notes
 
 ### Session Storage
