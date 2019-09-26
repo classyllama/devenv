@@ -26,9 +26,18 @@ auto_config_host
 # begin the configuration sequence
 Vagrant.require_version '>= 1.9.5'
 Vagrant.configure(2) do |conf|
-  conf.vm.define :web70, autostart: false do |node|
-    configure_basebox node, host: 'dev-web70', ip: '10.19.89.14'
-    configure_web node
+
+  conf.vm.define :web73, autostart: false do |node|
+    configure_basebox node, host: 'dev-web73', ip: '10.19.89.17'
+    configure_web node, php_version: 73
+    configure_percona node
+    configure_solr node
+    configure_elasticsearch node
+  end
+
+  conf.vm.define :web72, autostart: false do |node|
+    configure_basebox node, host: 'dev-web72', ip: '10.19.89.16'
+    configure_web node, php_version: 72
     configure_percona node
     configure_solr node
     configure_elasticsearch node
@@ -41,10 +50,10 @@ Vagrant.configure(2) do |conf|
     configure_solr node
     configure_elasticsearch node
   end
-
-  conf.vm.define :web72, autostart: false do |node|
-    configure_basebox node, host: 'dev-web72', ip: '10.19.89.16'
-    configure_web node, php_version: 72
+  
+  conf.vm.define :web70, autostart: false do |node|
+    configure_basebox node, host: 'dev-web70', ip: '10.19.89.14'
+    configure_web node
     configure_percona node
     configure_solr node
     configure_elasticsearch node

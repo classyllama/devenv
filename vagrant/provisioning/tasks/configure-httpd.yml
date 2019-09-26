@@ -2,8 +2,15 @@
 - name: Install httpd
   yum: name=httpd
 
-- name: Install mod_php
-  yum: name=php{{ php_version }}u enablerepo={{ php_enablerepo }}
+
+- name: drop u from IUS package name
+  set_fact:
+    php_package_name_extra: "{{ php_version }}"
+  when: php_enablerepo == "ius" and php_version >= 73 and php_package_name_extra == (php_version ~ "u")
+- name: install mod_php
+  yum: 
+    name: mod_php{{ php_package_name_extra }}
+    enablerepo: "{{ php_enablerepo }}"
 
 - name: Upload /etc/httpd
   copy:
