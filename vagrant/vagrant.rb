@@ -13,7 +13,7 @@ require_relative 'lib/provision'
 require_relative 'lib/machine'
 
 # configure environment paths
-BASE_DIR = base_dir('/server')
+BASE_DIR = base_dir('/Volumes/Server')
 MOUNT_PATH = mount_path(BASE_DIR)
 VAGRANT_DIR = BASE_DIR + '/vagrant'
 SHARED_DIR = BASE_DIR + '/.shared'
