@@ -17,11 +17,11 @@ export MAGE_MODE=developer
 
 # set vagrant environemnt vars
 export VAGRANT_IS_SETUP=true
-export VAGRANT_HOME=/server/.vagrant
+export VAGRANT_HOME=/Volumes/Server/.vagrant
 export VAGRANT_LOG=
 
 # set central composer home
-export COMPOSER_HOME=/server/.shared/composer
+export COMPOSER_HOME=/Volumes/Server/.shared/composer
 
 # configure PATH to use local and user scripts
 export PATH=~/bin:/usr/local/bin:/server/vagrant/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
