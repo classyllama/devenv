@@ -13,7 +13,7 @@
 def base_dir (base_dir)
   # evaluates to true if is not either a valid directory a symlink pointing to a directory
   if !File.directory?(base_dir)
-    throw 'Error: please create a /server link pointing to the environment root'
+    throw 'Error: please create a /Volumes/Server link pointing to the environment root'
   end
 
   # assert base_dir points to our environment root
@@ -120,7 +120,7 @@ unset i
   # verify virtualbox machine directory
   vbox_machine_dir = %x{VBoxManage list systemproperties | grep 'Default machine folder:' | sed 's/.*: *//g'}.strip!
   if vbox_machine_dir != "#{BASE_DIR}/.machines"
-    puts "==> host: Setting global VirtualBox machine folder to /server/.machines"
+    puts "==> host: Setting global VirtualBox machine folder to /Volumes/Server/.machines"
     system %-VBoxManage setproperty machinefolder #{BASE_DIR}/.machines-
     changes = true
   end

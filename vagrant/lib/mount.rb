@@ -41,7 +41,7 @@ class Mount
   # +host_path+:: +String+ path to required share directory
   def self.assert_export (host_path)
     if File.exist?('/etc/exports') == false
-      $stderr.puts "Error: /etc/exports does not exist. See /server/README.md for details"
+      $stderr.puts "Error: /etc/exports does not exist. See /Volumes/Server/README.md for details"
       exit false
     end
 
@@ -51,7 +51,7 @@ class Mount
         return true
       end
     end
-    $stderr.puts "Error: /etc/exports is missing an entry for #{host_path}/. See /server/README.md for details"
+    $stderr.puts "Error: /etc/exports is missing an entry for #{host_path}/. See /Volumes/Server/README.md for details"
     exit false
   end
 
