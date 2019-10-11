@@ -91,64 +91,42 @@ function assert_cli_tools {
 
 function assert_devenv {
     # verify server link and mount
-    echo "==> Checking /server for environment setup"
+    echo "==> Checking /Volumes/Server for environment setup"
 
-    if [[ ! -d /server ]] && [[ -L /server ]]; then
-        >&2 echo "Warning: /server is a dead symbolic link pointing to nowhere. Removing and moving on..."
-        sudo rm -f /server
+    # create /Volumes/Server if it doesn't exist
+    if [[ ! -d /Volumes/Server ]]; then
+        >&2 echo "Warning: Failed to detect /Volumes/Server mount. Creating directory instead"
+        >&2 echo "Warning: This may cause case-insensitivity issues in guest machines"
+        sudo mkdir /Volumes/Server
         made_changes=1
     fi
 
-    # nothing is at /server, so begin setup by creating it
-    if [[ ! -d /server ]] && [[ ! -L /server ]]; then
-        if [[ -d "/Volumes/Server" ]]; then
-            echo "==> Creating /server -> /Volumes/Server symbolic link"
-            sudo ln -s /Volumes/Server /server
-            made_changes=1
-        else
-            >&2 echo "Warning: Failed to detect /Volumes/Server mount. Creating directory at /server instead"
-            sudo mkdir /server
-            made_changes=1
-        fi
-    fi
-
-    if [[ -d /server ]] && [[ ! -L /server ]]; then
-        >&2 echo "Warning: /server is a directory. This may cause case-insensitivity issues in guest machines"
-    fi
-
-    # create /sites link if not exists
-    if [[ ! -d /sites ]] && [[ ! -L /sites ]]; then
-        echo "==> Creating /sites -> /server/sites symbolic link"
-        sudo ln -s /server/sites /sites
-        made_changes=1
-    fi
-
-    # verify /server is empty (barring system dotfiles) and hasn't been git inited
-    if [[ ! "$(ls /server | head -n1)" ]] && [[ ! -f /server/.git/config ]] ; then
-        echo "==> Installing environment at /server"
-        sudo chown $(whoami):admin /server
-        cd /server
+    # verify /Volumes/Server is empty (barring system dotfiles) and hasn't been git inited
+    if [[ ! "$(ls /Volumes/Server | head -n1)" ]] && [[ ! -f /Volumes/Server/.git/config ]] ; then
+        echo "==> Installing environment at /Volumes/Server"
+        sudo chown $(whoami):admin /Volumes/Server
+        cd /Volumes/Server
         git init -q
         git remote add origin https://github.com/classyllama/devenv.git
         git fetch -q origin
         git checkout -q master
         vagrant status | grep -v '/etc/profile' || true  # note: expected to spit out error about re-running vagrant
-        echo "==> Please run `source /etc/profile` in your shell before starting vagrant"
+        echo "==> Please run `source /etc/profile` (bash) or `source /etc/zprofile` in your shell before starting vagrant"
 
         made_changes=1
-    elif [[ ! -f /server/vagrant/vagrant.rb ]]; then
-        >&2 echo "Error: /server is not empty, but does not appear to be setup either. Moving on..."
+    elif [[ ! -f /Volumes/Server/vagrant/vagrant.rb ]]; then
+        >&2 echo "Error: /Volumes/Server is not empty, but does not appear to be setup either. Moving on..."
     fi
     
     # TODO: add --update support to devenv assertion
 }
 
 function assert_composer {
-    # note: depends on /server being valid
+    # note: depends on /Volumes/Server being valid
     echo "==> Checking for composer"
     if [[ ! -x /usr/local/bin/composer ]]; then
         echo "==> Installing composer"
-        mkdir -p /server/.shared/composer
+        mkdir -p /Volumes/Server/.shared/composer
         wget -q https://getcomposer.org/composer.phar -O /usr/local/bin/composer
         chmod +x /usr/local/bin/composer
         made_changes=1
@@ -159,11 +137,11 @@ function assert_composer {
     fi
 
     # stat results in 0000 if file is not there; doubles as permission and presence check
-    if [[ "$(perl -le 'printf "%04o", (stat("/server/.shared/composer/auth.json"))[2] & 07777;')" != "0640" ]]; then
+    if [[ "$(perl -le 'printf "%04o", (stat("/Volumes/Server/.shared/composer/auth.json"))[2] & 07777;')" != "0640" ]]; then
         echo "==> Initializing global composer config"
         # has effect of creating auth.json with an object of empty vals at expected COMPOSER_HOME location
-        COMPOSER_HOME=/server/.shared/composer /usr/local/bin/composer config -g
-        chmod 640 /server/.shared/composer/auth.json
+        COMPOSER_HOME=/Volumes/Server/.shared/composer /usr/local/bin/composer config -g
+        chmod 640 /Volumes/Server/.shared/composer/auth.json
     fi
 }
 
