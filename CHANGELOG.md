@@ -1,3 +1,17 @@
+2.0.21
+===============
+
+* web73 node
+
+When you run vagrant for the first time after updating it will likely prompt you for credentials so that it can add an entry to your /etc/hosts file for the new web73 machine.
+
+Some PHP Extensions do not exists on the web73 instance due to them not being available in the IUS repo
+
+  mhash
+  curl
+  xsl
+  zip
+
 2.0.20
 ===============
 
