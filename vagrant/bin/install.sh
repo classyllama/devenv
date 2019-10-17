@@ -111,7 +111,7 @@ function assert_devenv {
         git fetch -q origin
         git checkout -q master
         vagrant status | grep -v '/etc/profile' || true  # note: expected to spit out error about re-running vagrant
-        echo "==> Please run `source /etc/profile` (bash) or `source /etc/zprofile` in your shell before starting vagrant"
+        echo "==> Please run `source /etc/profile` (bash) or `source ~/.zshrc` (zsh) in your shell before starting vagrant"
 
         made_changes=1
     elif [[ ! -f /Volumes/Server/vagrant/vagrant.rb ]]; then

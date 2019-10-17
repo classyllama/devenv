@@ -90,12 +90,12 @@ done
 unset i
 -
 
-    # append script to /etc/[z]profile and then execute that new portion to pickup env configuration
+    # append script to /etc/profile and ~/.zshrc and then execute that new portion to pickup env configuration
     system %-
       printf "\n## VAGRANT START ##%s## VAGRANT END ##\n" '#{profile_script}'| sudo tee \-a /etc/profile > /dev/null
     -
     system %-
-      printf "\n## VAGRANT START ##%s## VAGRANT END ##\n" '#{profile_script}'| sudo tee \-a /etc/zprofile > /dev/null
+      printf "\n## VAGRANT START ##%s## VAGRANT END ##\n" '#{profile_script}'| sudo tee \-a ~/.zshrc > /dev/null
     -
     changes = true
     newsh = true
@@ -131,7 +131,7 @@ unset i
 
   # prevent run if shell doesn't have expected env vars set from profile.d scripts or if changes require such
   if newsh or (changes == false && ENV['VAGRANT_IS_SETUP'] != 'true')
-    puts 'Please re-run the command in a new shell... or type `source /etc/profile` (bash) or `source /etc/zprofile` (zsh) and then try again'
+    puts 'Please re-run the command in a new shell... or type `source /etc/profile` (bash) or `source ~/.zshrc` (zsh) and then try again'
     exit 1
   end
 end
