@@ -90,7 +90,7 @@
           dest: ~/.vimrc
 
       - file:
-          src: /server/.shared/vim/plugin
+          src: /Volumes/Server/.shared/vim/plugin
           dest: ~/.vim/plugin
           state: link
           force: yes

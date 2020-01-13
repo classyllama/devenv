@@ -41,18 +41,10 @@ class Mount
   # +host_path+:: +String+ path to required share directory
   def self.assert_export (host_path)
     if File.exist?('/etc/exports') == false
-      $stderr.puts "Error: /etc/exports does not exist. See /server/README.md for details"
+      $stderr.puts "Error: /etc/exports does not exist. See /Volumes/Server/README.md for details"
       exit false
     end
 
-    exports = File.readlines('/etc/exports')
-    for line in exports
-      if line.start_with?(host_path + '/ -alldirs')
-        return true
-      end
-    end
-    $stderr.puts "Error: /etc/exports is missing an entry for #{host_path}/. See /server/README.md for details"
-    exit false
   end
 
   # Sets up the vagrant configuration neccesary for the mounts configured via the Mount class

@@ -27,7 +27,7 @@ function __git_ps1_devenv {
         return
     fi
     
-    server_path="$(readlink /server || echo /server)"
+    server_path="$(readlink /Volumes/Server || echo /Volumes/Server)"
     if [[ "$(git rev-parse --show-toplevel 2>/dev/null | grep -vE "^$server_path$")" ]]; then
         gs=$(__git_ps1) && [ "$gs" ] && echo "$gs "
     fi

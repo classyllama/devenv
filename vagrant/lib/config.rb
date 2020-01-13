@@ -13,7 +13,7 @@
 def base_dir (base_dir)
   # evaluates to true if is not either a valid directory a symlink pointing to a directory
   if !File.directory?(base_dir)
-    throw 'Error: please create a /server link pointing to the environment root'
+    throw 'Error: please create a /Volumes/Server link pointing to the environment root'
   end
 
   # assert base_dir points to our environment root
@@ -90,9 +90,12 @@ done
 unset i
 -
 
-    # append script to /etc/profile and then execute that new portion to pickup env configuration
+    # append script to /etc/profile and ~/.zshrc and then execute that new portion to pickup env configuration
     system %-
       printf "\n## VAGRANT START ##%s## VAGRANT END ##\n" '#{profile_script}'| sudo tee \-a /etc/profile > /dev/null
+    -
+    system %-
+      printf "\n## VAGRANT START ##%s## VAGRANT END ##\n" '#{profile_script}'| sudo tee \-a ~/.zshrc > /dev/null
     -
     changes = true
     newsh = true
@@ -104,8 +107,7 @@ unset i
     
     mapall = %x{printf $(id \-u):$(grep ^admin: /etc/group | cut \-d : \-f 3)}
     nfs_exports = %-
-#{MOUNT_PATH}/sites/ \-alldirs \-network 10.19.89.0 \-mask 255.255.255.0 \-mapall=#{mapall}
-#{MOUNT_PATH}/mysql/ \-alldirs \-network 10.19.89.0 \-mask 255.255.255.0 \-mapall=#{mapall}
+#{MOUNT_PATH}/ \-alldirs \-network 10.19.89.0 \-mask 255.255.255.0 \-mapall=#{mapall}
 -
     system %-
       printf "\n## VAGRANT START ##%s## VAGRANT END ##\n" '#{nfs_exports}' | sudo tee \-a /etc/exports > /dev/null
@@ -117,7 +119,7 @@ unset i
   # verify virtualbox machine directory
   vbox_machine_dir = %x{VBoxManage list systemproperties | grep 'Default machine folder:' | sed 's/.*: *//g'}.strip!
   if vbox_machine_dir != "#{BASE_DIR}/.machines"
-    puts "==> host: Setting global VirtualBox machine folder to /server/.machines"
+    puts "==> host: Setting global VirtualBox machine folder to /Volumes/Server/.machines"
     system %-VBoxManage setproperty machinefolder #{BASE_DIR}/.machines-
     changes = true
   end
@@ -128,7 +130,7 @@ unset i
 
   # prevent run if shell doesn't have expected env vars set from profile.d scripts or if changes require such
   if newsh or (changes == false && ENV['VAGRANT_IS_SETUP'] != 'true')
-    puts 'Please re-run the command in a new shell... or type `source /etc/profile` and then try again'
+    puts 'Please re-run the command in a new shell... or type `source /etc/profile` (bash) or `source ~/.zshrc` (zsh) and then try again'
     exit 1
   end
 end
