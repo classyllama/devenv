@@ -30,7 +30,7 @@ It is setup with different machines running different versions of PHP (PHP 7.0 i
 3. Run the following to start up the virtual machines. This may take a while on first run
 
     ```bash
-    cd /server
+    cd /Volumes/Server
     vagrant up
     ```
 
@@ -96,14 +96,14 @@ The `vhosts.sh` script looks for the pretense of three locations within each dir
 * /sites/example.dev/html
 * /sites/example.dev/htdocs
 
-If any of these three paths exist, a virtual host will be created based on the template found in `/server/vagrant/etc/httpd/sites.d/__vhost.conf.template`. The `DocumentRoot` will be configured using the first of the above three paths found for a given site directory. The `ServerName` will match the name of the sites directory (example.dev above) and a wildcard `ServerAlias` is included to support relevant sub-domains. When a file is found at `/sites/example.dev/.vhost.conf` it will be used in leu of the template file. Any updates to this file will be applied to the host configuration on subsequent runs of the `vhosts.sh` script.
+If any of these three paths exist, a virtual host will be created based on the template found in `/Volumes/Server/vagrant/etc/httpd/sites.d/__vhost.conf.template`. The `DocumentRoot` will be configured using the first of the above three paths found for a given site directory. The `ServerName` will match the name of the sites directory (example.dev above) and a wildcard `ServerAlias` is included to support relevant sub-domains. When a file is found at `/sites/example.dev/.vhost.conf` it will be used in leu of the template file. Any updates to this file will be applied to the host configuration on subsequent runs of the `vhosts.sh` script.
 
 #### PHP Versions
 
 The default web70 node has PHP 7.0.x from the IUS repository. PHP 5.6 is also available via the web56 node, but it will not start automatically. To use it, start via `vagrant up web56`, then configure your local hosts file to point the site needing this specific version of PHP to the correct machine instance.
 
 #### SSL
-When the `web` VM is provisioned, a root CA is automatically generated and stored at `/server/.shared/ssl/rootca/certs/ca.cert.pem` if it does not already exist.
+When the `web` VM is provisioned, a root CA is automatically generated and stored at `/Volumes/Server/.shared/ssl/rootca/certs/ca.cert.pem` if it does not already exist.
 During vhost discovery and configuration, a wildcard cert, signed by the root CA, is automatically generated for it. Nginx is configured accordingly.
 
 This means that all vhosts support SSL on both the naked domain and any immediate subdomain. 
@@ -113,7 +113,7 @@ Since these certs are all signed by the persistent root CA, if the root CA is ad
 To add the generated root CA to your trusted certs list on the host machine, run this command (after vagrant up has been run):
 
 ```bash
-sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /server/.shared/ssl/rootca/certs/ca.cert.pem
+sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /Volumes/Server/.shared/ssl/rootca/certs/ca.cert.pem
 ```
 
 For Firefox you will need to add the certificate authority manually through Firefox's interface.
