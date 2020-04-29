@@ -12,9 +12,9 @@
     - set_fact: php_enablerepo=ius-archive
       when: php_version <= 55
       
-    # PHP 7.0 is past EOL and only available via the IUS archive repo now
+    # PHP 7.0 adn 7.1 are past EOL and only available via the IUS archive repo now
     - set_fact: php_enablerepo=ius-archive
-      when: php_version == 70
+      when: php_version >= 70 and php_version <= 71
 
     # PHP 5.6 is past EOL and only available via the IUS archive repo now
     # pecl-memcache is only available for PHP 5.6 and earlier
